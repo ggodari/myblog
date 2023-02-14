@@ -95,7 +95,7 @@ public class Comment {
         List<Comment> result = new ArrayList<>();
 
 
-        // 대댓글인 경우 부모가 삭제되었고, 모든 댓글인 삭제된 경우 리스트를 반환
+        // 대댓글인 경우 부모가 삭제되었고, 모든 댓글이 삭제된 경우 리스트를 반환
         Optional.ofNullable(this.parent).ifPresent(
                 parentComment -> {  //대댓글인 경우
                     if(parentComment.isRemoved() && parentComment.isAllChildRemoved()) {
@@ -118,6 +118,10 @@ public class Comment {
 
     // 모든 자식 댓글이 삭제되었는지 판단
     private boolean isAllChildRemoved() {
-        return getChildList().stream().map(Comment::isRemoved).filter(isRemoved -> !isRemoved).findAny().orElse(false);
+        return getChildList().stream().
+                map(Comment::isRemoved)             // 지워졌는지 여부로 판단
+                .filter(isRemoved -> !isRemoved)    // 지워졌으면 true, 안지워졌으면 false
+                .findAny()                          // 지워지지 않은게 하나라도 있다면 false 를 리턴
+                .orElse(false);
     }
 }
