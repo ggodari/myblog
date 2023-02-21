@@ -6,6 +6,7 @@ import com.example.myboard.domain.member.dto.MemberSignUpDto;
 import com.example.myboard.domain.member.dto.MemberUpdateDto;
 import com.example.myboard.domain.member.exception.MemberException;
 import com.example.myboard.domain.member.exception.MemberExceptionType;
+import com.example.myboard.domain.member.exception.TestEnum;
 import com.example.myboard.domain.member.repository.MemberRepository;
 import com.example.myboard.global.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
